@@ -48,11 +48,10 @@
         btn.disabled = true;
         btn.textContent = 'Saving…';
         const savedLocal = FM.Store.saveEntry(entry);
-        const savedServer = await FM.push(entry);
         form.hidden = true;
-        FM.$('#rfSaveNote').textContent = savedServer
-          ? 'Saved to your journal and the server database.'
-          : (savedLocal ? 'Saved to your journal in this browser. It will copy to the server next time the app is running.' : 'We could not save this entry. Check that your browser allows local storage.');
+        FM.$('#rfSaveNote').textContent = savedLocal
+          ? 'Saved privately in this browser. Your reflection is not uploaded to the server.'
+          : 'We could not save this entry. Check that your browser allows local storage.'
         FM.$('#rfThanks').hidden = false;
         FM.$('#rfThanks h2').setAttribute('tabindex', '-1');
         FM.$('#rfThanks h2').focus();
