@@ -73,10 +73,6 @@
     if (!confirm('Delete this journal entry? This cannot be undone.')) return;
     const uid = b.dataset.del;
     FM.Store.deleteEntry(uid);
-    if (await FM.remoteDelete(uid)) {
-      const left = JSON.parse(localStorage.getItem('fm_deleted') || '[]').filter((x) => x !== uid);
-      localStorage.setItem('fm_deleted', JSON.stringify(left));
-    }
     renderAll();
     FM.toast('Entry deleted.');
   });
@@ -88,8 +84,6 @@
   renderAll();
   FM.ready.then(() => {
     renderAll();
-    FM.$('#jSync').textContent = FM.online
-      ? 'Saved in this browser and in the server database.'
-      : 'The server database is not reachable, so entries are saved in this browser only.';
+    FM.$('#jSync').textContent = 'Your reflections are stored privately in this browser and are not uploaded to the server.';
   });
 })();
