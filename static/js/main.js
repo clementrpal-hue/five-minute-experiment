@@ -62,46 +62,14 @@
     setGoal(g) { ls.set('fm_goal', g); },
   };
 
-  /* ---------- server sync (SQLite) ---------- */
+  /* ---------- private browser-only journal ---------- */
+  // Reflections never leave this browser. Legacy server sync is disabled.
   FM.online = false;
-  FM.push = async (entry) => {
-    try {
-      const r = await fetch('/api/reflections', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry),
-      });
-      return r.ok;
-    } catch (e) { return false; }
-  };
-  FM.remoteDelete = async (uid) => {
-    try {
-      const r = await fetch('/api/reflections/' + encodeURIComponent(uid), { method: 'DELETE' });
-      return r.ok || r.status === 404;
-    } catch (e) { return false; }
-  };
-  FM.sync = async () => {
-    try {
-      for (const uid of ls.get('fm_deleted', []).slice()) {
-        if (await FM.remoteDelete(uid)) ls.set('fm_deleted', ls.get('fm_deleted', []).filter((x) => x !== uid));
-      }
-      const r = await fetch('/api/reflections');
-      if (!r.ok) throw new Error('bad status');
-      const remote = (await r.json()).reflections || [];
-      const deleted = new Set(ls.get('fm_deleted', []));
-      const merged = new Map(FM.Store.entries().map((e) => [e.uid, e]));
-      remote.forEach((e) => { if (!merged.has(e.uid) && !deleted.has(e.uid)) merged.set(e.uid, e); });
-      ls.set('fm_entries', Array.from(merged.values()));
-      const known = new Set(remote.map((e) => e.uid));
-      for (const e of merged.values()) if (!known.has(e.uid)) await FM.push(e);
-      FM.online = true;
-    } catch (e) { FM.online = false; }
-  };
+  FM.push = async () => false;
+  FM.remoteDelete = async () => false;
+  FM.sync = async () => { FM.online = false; };
   FM.ready = new Promise((resolve) => {
-    document.addEventListener('DOMContentLoaded', () => {
-      let done = false;
-      const finish = () => { if (!done) { done = true; resolve(); } };
-      FM.sync().then(finish, finish);
-      setTimeout(finish, 2500);
-    });
+    document.addEventListener('DOMContentLoaded', resolve, { once: true });
   });
 
   /* ---------- stats ---------- */
