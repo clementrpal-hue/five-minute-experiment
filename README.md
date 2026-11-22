@@ -1,8 +1,9 @@
 # The 5-Minute Experiment
 
-**Five Minutes. One New Experience. A Different You.**
+**Five Minutes. One New Experience. A Different You.**  
+A Flask + SQLite + vanilla JavaScript project created by **DARINGMATES**.
 
-A Flask + SQLite + vanilla JavaScript project featuring 48 original experiments, a countdown timer, reflections, a journal, a random experiment wheel, mystery mode, streaks, and weekly goals.
+The app contains 48 experiments, a countdown timer, reflections, a journal, a wheel, mystery mode, streaks and weekly goals.
 
 ## Run locally (Windows / VS Code)
 
@@ -19,24 +20,27 @@ python app.py
 
 If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process Bypass` and activate again.
 
-4. Open http://127.0.0.1:5000 in your browser. Stop the server with `Ctrl+C`.
-
-## Data storage
-
-- Journal, favourites, and goals use browser local storage.
-- Reflections and feedback are also saved to `instance/app.db`, which is created automatically.
-
-## Tests
-
-Run `python tests.py` after installing the requirements.
+Open http://127.0.0.1:5000. Stop the server with `Ctrl+C`.
 
 ## Project structure
 
 - `app.py` — Flask routes and API
-- `database.py` — SQLite helpers
-- `templates/` — HTML templates
-- `static/css/` — styles
-- `static/js/` — experiment data, timer, journal, reflection, and shared frontend logic
+- `database.py` — SQLite database helpers
+- `templates/` — Jinja/HTML pages
+- `static/js/` — JavaScript files
+- `static/css/` — stylesheets
 - `static/images/` — logo and favicon
+- `instance/` — local SQLite database (created automatically)
 
-> **Source upload status:** This repository currently contains the README only. The application source files from the project ZIP still need to be added.
+## Data storage
+
+- Journal, favourites and goals use browser local storage.
+- Reflections and feedback are also stored in `instance/app.db`.
+
+## Tests
+
+Run `python tests.py`.
+
+## Deployment
+
+For a production deployment, use a persistent disk for `instance/app.db` if you want SQLite data to survive redeployments. Configure a production WSGI server (such as Gunicorn) and a suitable start command on your hosting provider. Do not use Flask's development server in production.
