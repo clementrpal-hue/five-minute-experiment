@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}About DARINGMATES{% endblock %}
+{% block content %}
+<section class="container page-head narrow-left">
+  <h1>WE BELIEVE FIVE MINUTES CAN START SOMETHING DIFFERENT.</h1>
+  <p class="lead">DARINGMATES is a student development team exploring creative ways to make everyday experiences more interesting through technology, curiosity and experimentation.</p>
+</section>
+
+<section class="container section" aria-labelledby="teamH">
+  <div class="section-head"><h2 id="teamH">The team</h2></div>
+  <div class="team">
+    {% for m in team %}
+    <article class="member">
+      <div class="avatar" aria-hidden="true">{{ m.initials }}</div>
+      <h3>{{ m.name }}</h3>
+      <p class="muted small">Enrollment Number</p>
+      <p class="enroll">{{ m.enrollment }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container section" aria-labelledby="builtH">
+  <div class="section-head"><h2 id="builtH">How it's built</h2></div>
+  <div class="panel">
+    <p>The 5-Minute Experiment runs on Flask and SQLite with plain HTML, CSS and JavaScript. Your journal is saved in your browser first, and copied to the server database whenever the server is running.</p>
+  </div>
+</section>
+{% endblock %}

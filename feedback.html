@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Feedback{% endblock %}
+{% block content %}
+<section class="container narrow">
+  <div class="page-head tight">
+    <h1>Tell us how to make this better</h1>
+    <p class="lead">Ideas, bugs, experiments you'd love to see. We read all of it.</p>
+  </div>
+  <form id="fbForm" class="panel form" novalidate>
+    <label for="fbName">Name <span class="muted">(optional)</span></label>
+    <input id="fbName" name="name" type="text" maxlength="60" autocomplete="off">
+
+    <fieldset class="stars">
+      <legend>How is the site so far? <span class="muted">(optional)</span></legend>
+      <div class="star-row">
+        {% for i in range(5, 0, -1) %}
+        <input type="radio" id="f{{ i }}" name="rating" value="{{ i }}"><label for="f{{ i }}" title="{{ i }} out of 5"><span class="sr">{{ i }} out of 5</span>★</label>
+        {% endfor %}
+      </div>
+    </fieldset>
+
+    <label for="fbMsg">Your message <span class="req">required</span></label>
+    <textarea id="fbMsg" name="message" rows="5" maxlength="2000"></textarea>
+
+    <p id="fbError" class="error" role="alert" hidden></p>
+    <button type="submit" class="btn btn-primary btn-lg" id="fbSubmit">Send feedback</button>
+    <p class="muted small">Please don't include passwords or private details.</p>
+  </form>
+  <div id="fbThanks" class="panel thanks" hidden>
+    <h2>Thanks, your feedback is in.</h2>
+    <div class="cta-row"><a class="btn btn-primary" href="{{ url_for('discover', surprise=1) }}">Try an experiment</a><a class="btn btn-ghost" href="{{ url_for('index') }}">Back to home</a></div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/reflection.js') }}"></script>{% endblock %}

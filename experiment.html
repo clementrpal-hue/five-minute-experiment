@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Experiment{% endblock %}
+{% block content %}
+<section class="container xp" id="xp" data-id="{{ exp_id }}">
+  <div class="xp-info panel" id="xpInfo"><p class="muted">Loading experiment…</p></div>
+  <aside class="timer-card panel" id="timerCard" aria-label="Countdown timer">
+    <div class="ring-wrap">
+      <svg class="ring" viewBox="0 0 220 220" aria-hidden="true">
+        <defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8257F5"/><stop offset="1" stop-color="#25D0B1"/></linearGradient></defs>
+        <circle cx="110" cy="110" r="90" class="ring-bg"/>
+        <circle cx="110" cy="110" r="90" class="ring-fg" id="ringFg" stroke="url(#tg)"/>
+      </svg>
+      <div class="ring-text">
+        <div id="clock" class="clock" role="timer" aria-live="off">05:00</div>
+        <div id="status" class="muted" aria-live="polite">Ready when you are</div>
+      </div>
+    </div>
+    <div class="timer-btns">
+      <button type="button" class="btn btn-primary btn-lg" id="bStart">Start</button>
+      <button type="button" class="btn btn-primary btn-lg" id="bPause" hidden>Pause</button>
+      <button type="button" class="btn btn-primary btn-lg" id="bResume" hidden>Resume</button>
+      <button type="button" class="btn btn-ghost" id="bReset">Reset</button>
+      <button type="button" class="btn btn-teal" id="bFinish">Finish Experiment</button>
+    </div>
+    <label class="switch"><input type="checkbox" id="sound"><span class="track" aria-hidden="true"></span> Sound alert (off by default)</label>
+  </aside>
+</section>
+
+<div id="done" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="doneT">
+  <div class="overlay-card">
+    <div class="burst" id="burst" aria-hidden="true"></div>
+    <h2 id="doneT">Time's up. Nicely done.</h2>
+    <p class="muted">Taking you to your reflection…</p>
+    <a id="doneGo" class="btn btn-primary btn-lg" href="#">Write my reflection</a>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/timer.js') }}"></script>{% endblock %}

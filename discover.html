@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Discover experiments{% endblock %}
+{% block content %}
+<section class="container page-head">
+  <h1>Discover experiments</h1>
+  <p class="lead">Pick a filter or let chance decide. Every experiment fits in two, five or ten minutes.</p>
+</section>
+
+<section class="container" id="generator" aria-label="Experiment generator">
+  <div class="panel generator">
+    <div class="filters">
+      <label>Category<select id="fCat"></select></label>
+      <label>Difficulty
+        <select id="fDiff"><option value="">Any difficulty</option><option>Easy</option><option>Medium</option><option>Challenging</option></select>
+      </label>
+      <label>Duration
+        <select id="fDur"><option value="">Any duration</option><option value="2">2 minutes</option><option value="5">5 minutes</option><option value="10">10 minutes</option></select>
+      </label>
+      <label>Search by keyword<input id="fQ" type="search" placeholder="Try “draw”, “memory” or “stranger”" autocomplete="off"></label>
+    </div>
+    <div class="gen-actions">
+      <button type="button" id="surprise" class="surprise"><span>✦</span> SURPRISE ME</button>
+      <button type="button" id="breaker" class="btn btn-ghost">Comfort zone breaker</button>
+      <label class="switch"><input type="checkbox" id="mystery"><span class="track" aria-hidden="true"></span> Mystery mode</label>
+    </div>
+    <p class="hint">Comfort zone breaker picks a category different from the last experiment you completed.</p>
+    <div id="result" class="result-wrap" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="container section" aria-labelledby="dailyH">
+  <div class="section-head"><h2 id="dailyH">Daily experiment</h2><p class="muted">One featured challenge for everyone, refreshed every day.</p></div>
+  <div id="daily" class="daily"></div>
+</section>
+
+<section class="container section" aria-labelledby="wheelH">
+  <div class="section-head"><h2 id="wheelH">Random experiment wheel</h2><p class="muted">Spin it. Wherever it lands, you get an experiment from that category.</p></div>
+  <div class="panel wheel-panel">
+    <div class="wheel-box">
+      <div class="pointer" aria-hidden="true"></div>
+      <canvas id="wheel" width="440" height="440" role="img" aria-label="Wheel with eight experiment categories"></canvas>
+    </div>
+    <div class="wheel-side">
+      <button type="button" id="spin" class="btn btn-primary btn-lg">Spin the wheel</button>
+      <p id="wheelMsg" class="muted" aria-live="polite">The wheel is ready.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container section" id="categories" aria-labelledby="catH">
+  <div class="section-head"><h2 id="catH">Categories</h2></div>
+  <div class="cat-grid" id="catGrid"></div>
+</section>
+
+<section class="container section" aria-labelledby="favH">
+  <div class="section-head"><h2 id="favH">Saved experiments</h2></div>
+  <div id="favList" class="xgrid"></div>
+</section>
+
+<section class="container section" aria-labelledby="browseH">
+  <div class="section-head"><h2 id="browseH">Browse all</h2><p class="muted" id="browseCount"></p></div>
+  <div id="browse" class="xgrid"></div>
+</section>
+{% endblock %}
+{% block scripts %}{% endblock %}

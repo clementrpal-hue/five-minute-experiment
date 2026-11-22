@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Five Minutes. One New Experience.{% endblock %}
+{% block content %}
+<section class="container hero">
+  <div class="hero-copy">
+    <p class="product"><span class="pbadge">5′</span> The 5-Minute Experiment</p>
+    <h1>YOUR ROUTINE NEEDS A LITTLE CHAOS.</h1>
+    <p class="lead">Five minutes is all it takes to discover something new about the world around you — or yourself.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('discover', surprise=1) }}">Start My Experiment</a>
+      <a class="btn btn-ghost btn-lg" href="{{ url_for('discover') }}">Explore Experiments</a>
+    </div>
+    <p class="tagline">Five Minutes. One New Experience. A Different You.</p>
+  </div>
+  <div class="hero-art">
+    <svg class="clock-art" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="ha" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8257F5"/><stop offset="1" stop-color="#25D0B1"/></linearGradient>
+        <radialGradient id="hg" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8257F5" stop-opacity=".45"/><stop offset="1" stop-color="#8257F5" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="200" cy="200" r="190" fill="url(#hg)"/>
+      <circle class="orbit" cx="200" cy="200" r="150" fill="none" stroke="url(#ha)" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round"/>
+      <circle cx="200" cy="205" r="92" fill="#181d38" stroke="url(#ha)" stroke-width="8"/>
+      <rect x="182" y="94" width="36" height="14" rx="5" fill="url(#ha)"/><rect x="194" y="106" width="12" height="16" fill="url(#ha)"/>
+      <g stroke="#F7F8FC" stroke-width="6" stroke-linecap="round"><path d="M200 135v14M200 261v14M130 205h14M256 205h14"/></g>
+      <path d="M170 203l24 24 44-44" fill="none" stroke="#F7F8FC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="spark" d="M318 92l7 20 20 7-20 7-7 20-7-20-20-7 20-7z" fill="#25D0B1"/>
+      <path class="spark s2" d="M78 292l5 14 14 5-14 5-5 14-5-14-14-5 14-5z" fill="#8257F5"/>
+    </svg>
+    <div class="floaters" id="floaters"></div>
+  </div>
+</section>
+
+<section class="container band">
+  <div class="band-in">
+    <div><h2>Got five minutes?</h2><p class="muted">One tap picks something you've probably never tried.</p></div>
+    <a class="surprise" href="{{ url_for('discover', surprise=1) }}"><span>✦</span> SURPRISE ME</a>
+  </div>
+</section>
+
+<section class="container section" id="dashboard" aria-labelledby="dashH">
+  <div class="section-head">
+    <h2 id="dashH">Your dashboard</h2>
+    <p class="muted" id="dashNote">Guest dashboard. Your progress is saved in this browser. No sample numbers are shown here.</p>
+  </div>
+  <div class="stats">
+    <div class="stat s1"><span class="stat-label">Experiments available</span><strong id="stAvail">0</strong></div>
+    <div class="stat s2"><span class="stat-label">Completed</span><strong id="stDone">0</strong></div>
+    <div class="stat s3"><span class="stat-label">Time experimenting</span><strong id="stTime">0 min</strong></div>
+    <div class="stat s4"><span class="stat-label">Current streak</span><strong id="stStreak">0 days</strong></div>
+    <div class="stat s5"><span class="stat-label">Favourite category</span><strong id="stFav">Not yet</strong></div>
+  </div>
+  <div class="dash-grid">
+    <div class="panel"><h3>Last 7 days</h3><div id="weekChart" class="bars" role="img" aria-label="Experiments completed in the last 7 days"></div></div>
+    <div class="panel"><h3>Category progress</h3><div id="catProgress"></div></div>
+    <div class="panel"><h3>Recent activity</h3><ul id="recent" class="plain-list"></ul></div>
+    <div class="panel" id="goalBox"><h3>Personal challenge</h3><div id="goalBody"></div></div>
+  </div>
+</section>
+
+<section class="container section" aria-labelledby="dayH">
+  <div class="section-head"><h2 id="dayH">Experiment of the day</h2><p class="muted">Everyone gets the same one today. It changes at midnight.</p></div>
+  <div id="daily" class="daily"></div>
+</section>
+
+<section class="container section" id="categories" aria-labelledby="catH">
+  <div class="section-head"><h2 id="catH">Eight places to get curious</h2></div>
+  <div class="cat-grid" id="catGrid"></div>
+</section>
+{% endblock %}
+{% block scripts %}{% endblock %}

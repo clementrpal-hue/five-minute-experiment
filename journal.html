@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}My journal{% endblock %}
+{% block content %}
+<section class="container page-head">
+  <h1>My journal</h1>
+  <p class="lead">Every experiment you finish and every reflection you write, in one place.</p>
+  <p class="muted" id="jSync"></p>
+</section>
+
+<section class="container" aria-label="Journal summary">
+  <div class="stats">
+    <div class="stat s1"><span class="stat-label">Completed</span><strong id="jTotal">0</strong></div>
+    <div class="stat s2"><span class="stat-label">Average rating</span><strong id="jAvg">–</strong></div>
+    <div class="stat s3"><span class="stat-label">Time experimenting</span><strong id="jTime">0 min</strong></div>
+    <div class="stat s4"><span class="stat-label">Current streak</span><strong id="jStreak">0 days</strong></div>
+    <div class="stat s5"><span class="stat-label">Saved favourites</span><strong id="jFavs">0</strong></div>
+  </div>
+</section>
+
+<section class="container section dash-grid two">
+  <div class="panel"><h2 class="h3">Activity, last 12 weeks</h2><div id="heat" class="heat" role="img" aria-label="Activity heatmap for the last 12 weeks"></div><p class="muted small legend">Darker squares mean more experiments that day.</p></div>
+  <div class="panel"><h2 class="h3">Progress by category</h2><div id="jCat"></div></div>
+</section>
+
+<section class="container section" aria-labelledby="entH">
+  <div class="section-head"><h2 id="entH">Reflections</h2></div>
+  <div class="panel filters jfilters">
+    <label>Search<input id="jq" type="search" placeholder="Search titles and notes" autocomplete="off"></label>
+    <label>Category<select id="jcat"></select></label>
+    <label>Rating
+      <select id="jrate"><option value="0">Any rating</option><option value="4">4 stars and up</option><option value="5">5 stars</option><option value="-3">3 stars or fewer</option></select>
+    </label>
+    <label>Sort
+      <select id="jsort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="rate">Highest rated</option></select>
+    </label>
+  </div>
+  <p class="muted" id="jCount" aria-live="polite"></p>
+  <div id="entries" class="entries"></div>
+</section>
+
+<section class="container section" aria-labelledby="jfavH">
+  <div class="section-head"><h2 id="jfavH">Saved favourites</h2></div>
+  <div id="favList" class="xgrid"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/journal.js') }}"></script>{% endblock %}

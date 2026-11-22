@@ -1,0 +1,18 @@
+{% from '_logo.html' import logo %}
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="{{ url_for('index') }}" aria-label="DARINGMATES home">
+      {{ logo('nav', 38) }}<span class="wordmark">DARINGMATES</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ url_for('discover') }}" {% if request.endpoint == 'discover' %}aria-current="page"{% endif %}>Discover Experiments</a>
+      <a href="{{ url_for('discover') }}#categories">Categories</a>
+      <a href="{{ url_for('journal') }}" {% if request.endpoint == 'journal' %}aria-current="page"{% endif %}>My Journal</a>
+      <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>About</a>
+      <a href="{{ url_for('feedback') }}" {% if request.endpoint == 'feedback' %}aria-current="page"{% endif %}>Feedback</a>
+      <a class="btn btn-primary btn-small nav-cta" href="{{ url_for('discover', surprise=1) }}">Try an Experiment</a>
+    </nav>
+  </div>
+</header>

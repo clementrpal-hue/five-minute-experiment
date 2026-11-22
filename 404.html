@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Page not found{% endblock %}
+{% block content %}
+<section class="container narrow center page-pad">
+  <h1>That page wandered off.</h1>
+  <p class="lead">The page you wanted doesn't exist, but there are 48 experiments waiting.</p>
+  <div class="cta-row center-row">
+    <a class="btn btn-primary" href="{{ url_for('discover', surprise=1) }}">Surprise me</a>
+    <a class="btn btn-ghost" href="{{ url_for('index') }}">Back to home</a>
+  </div>
+</section>
+{% endblock %}

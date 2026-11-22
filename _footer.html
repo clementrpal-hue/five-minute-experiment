@@ -1,0 +1,29 @@
+{% from '_logo.html' import logo %}
+<footer class="footer">
+  <div class="container footer-in">
+    <div class="foot-brand">
+      {{ logo('foot', 44) }}
+      <div>
+        <p class="foot-title">THE 5-MINUTE EXPERIMENT</p>
+        <p class="muted">Created with curiosity by DARINGMATES.</p>
+        <p class="foot-tag">Break the routine. Experiment with life.</p>
+      </div>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('discover') }}">Discover</a>
+      <a href="{{ url_for('discover') }}#categories">Categories</a>
+      <a href="{{ url_for('journal') }}">My Journal</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <a href="{{ url_for('feedback') }}">Feedback</a>
+      <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+    </nav>
+  </div>
+  <div class="container foot-legal">
+    <p>© 2026 DARINGMATES. All Rights Reserved.</p>
+    <p>Designed and Developed by DARINGMATES.</p>
+    <p class="muted">Clement R Pal | Abhijeet Kumar | Amrit Kalash | Anuj China | Ayush Jaiswal</p>
+    <p class="muted small">Copyright covers the original content and code written by the DARINGMATES team. Third-party fonts, libraries, frameworks and tools belong to their respective owners.</p>
+  </div>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>

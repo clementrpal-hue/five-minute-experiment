@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Your reflection{% endblock %}
+{% block content %}
+<section class="container narrow" id="rf" data-id="{{ exp_id }}">
+  <div id="rfMissing" class="panel" hidden>
+    <h1>We couldn't find that experiment.</h1>
+    <p class="muted">Pick another one and your reflection will be saved with it.</p>
+    <a class="btn btn-primary" href="{{ url_for('discover') }}">Find an experiment</a>
+  </div>
+
+  <div id="rfMain" hidden>
+    <div class="page-head tight">
+      <h1>YOU DID SOMETHING DIFFERENT TODAY.</h1>
+      <p class="lead" id="rfSub"></p>
+    </div>
+    <form id="rfForm" class="panel form" novalidate>
+      <label for="experience">What did you experience? <span class="req">required</span></label>
+      <textarea id="experience" name="experience" rows="3" maxlength="2000"></textarea>
+
+      <label for="surprise">What surprised you?</label>
+      <textarea id="surprise" name="surprise" rows="2" maxlength="2000"></textarea>
+
+      <label for="learned">What did you learn?</label>
+      <textarea id="learned" name="learned" rows="2" maxlength="2000"></textarea>
+
+      <label for="feeling">How did you feel during the experiment?</label>
+      <textarea id="feeling" name="feeling" rows="2" maxlength="2000"></textarea>
+
+      <fieldset class="stars">
+        <legend>How would you rate it? <span class="req">required</span></legend>
+        <div class="star-row">
+          {% for i in range(5, 0, -1) %}
+          <input type="radio" id="r{{ i }}" name="rating" value="{{ i }}"><label for="r{{ i }}" title="{{ i }} out of 5"><span class="sr">{{ i }} out of 5</span>★</label>
+          {% endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset class="choices">
+        <legend>How would you describe it?</legend>
+        <label class="pill"><input type="checkbox" name="tags" value="very-interesting"> Very interesting</label>
+        <label class="pill"><input type="checkbox" name="tags" value="enjoyable"> Enjoyable</label>
+        <label class="pill"><input type="checkbox" name="tags" value="challenging"> Challenging</label>
+        <label class="pill"><input type="checkbox" name="tags" value="boring"> Boring</label>
+        <label class="pill"><input type="checkbox" name="tags" value="difficult"> Difficult to understand</label>
+      </fieldset>
+
+      <fieldset class="choices">
+        <legend>Would you try this experiment again?</legend>
+        <label class="pill"><input type="radio" name="again" value="yes"> Yes</label>
+        <label class="pill"><input type="radio" name="again" value="maybe"> Maybe</label>
+        <label class="pill"><input type="radio" name="again" value="no"> No</label>
+      </fieldset>
+
+      <label for="suggestion">What would you like us to improve?</label>
+      <textarea id="suggestion" name="suggestion" rows="2" maxlength="2000"></textarea>
+
+      <p id="rfError" class="error" role="alert" hidden></p>
+      <button type="submit" class="btn btn-primary btn-lg" id="rfSubmit">SUBMIT MY EXPERIENCE</button>
+      <p class="muted small">No name, email or other personal details needed.</p>
+    </form>
+
+    <div id="rfThanks" class="panel thanks" hidden>
+      <h2>YOUR FIVE MINUTES MATTERED. THANK YOU FOR EXPERIMENTING!</h2>
+      <p class="muted" id="rfSaveNote"></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="{{ url_for('journal') }}">See my journal</a>
+        <a class="btn btn-ghost" href="{{ url_for('discover', surprise=1) }}">Try another experiment</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/reflection.js') }}"></script>{% endblock %}
