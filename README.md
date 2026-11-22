@@ -1,46 +1,51 @@
 # The 5-Minute Experiment
 
-**Five Minutes. One New Experience. A Different You.**  
-A Flask + SQLite + vanilla JavaScript project created by **DARINGMATES**.
+A Flask-powered experiment and reflection platform created by DARINGMATES.
 
-The app contains 48 experiments, a countdown timer, reflections, a journal, a wheel, mystery mode, streaks and weekly goals.
+## Tech stack
+- Python + Flask
+- SQLite
+- HTML, CSS and vanilla JavaScript
 
-## Run locally (Windows / VS Code)
+## Run locally
 
-1. Install Python 3.10 or newer.
-2. Open this project folder in VS Code.
-3. Open **Terminal → New Terminal** and run:
+1. Create and activate a virtual environment.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Start the app: `python app.py`
+4. Open `http://127.0.0.1:5000`.
 
-```powershell
-py -m venv venv
-venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python app.py
+The app creates its SQLite database at `instance/app.db` automatically.
+
+## Deploy
+
+The repository includes a `Procfile` for platforms that support Procfile-based deployment:
+
+```bash
+gunicorn app:app
 ```
 
-If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process Bypass` and activate again.
+Set the service's build command to `pip install -r requirements.txt` and its start command to `gunicorn app:app` if your host asks for them separately.
 
-Open http://127.0.0.1:5000. Stop the server with `Ctrl+C`.
-
-## Project structure
-
-- `app.py` — Flask routes and API
-- `database.py` — SQLite database helpers
-- `templates/` — Jinja/HTML pages
-- `static/js/` — JavaScript files
-- `static/css/` — stylesheets
-- `static/images/` — logo and favicon
-- `instance/` — local SQLite database (created automatically)
-
-## Data storage
-
-- Journal, favourites and goals use browser local storage.
-- Reflections and feedback are also stored in `instance/app.db`.
+**Database note:** SQLite data is stored in `instance/app.db`. Use a host with persistent disk storage mounted at the application instance directory, or migrate to a managed database such as PostgreSQL, before relying on data across deploys/restarts. Do not commit a live database file.
 
 ## Tests
 
-Run `python tests.py`.
+Run the smoke tests with:
 
-## Deployment
+```bash
+python tests.py
+```
 
-For a production deployment, use a persistent disk for `instance/app.db` if you want SQLite data to survive redeployments. Configure a production WSGI server (such as Gunicorn) and a suitable start command on your hosting provider. Do not use Flask's development server in production.
+## Project layout
+
+- `app.py` — Flask routes and API
+- `database.py` — SQLite schema and connection helpers
+- `templates/` — Jinja templates
+- `static/css/` — stylesheets
+- `static/js/` — browser-side functionality
+- `static/images/` — logo and favicon
+- `tests.py` — automated smoke tests
+
+## Team
+
+DARINGMATES — Clement R Pal, Abhijeet Kumar, Amrit Kalash, Anuj China and Ayush Jaiswal.
