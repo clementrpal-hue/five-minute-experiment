@@ -47,8 +47,6 @@
     },
     deleteEntry(uid) {
       ls.set('fm_entries', this.entries().filter((x) => x.uid !== uid));
-      const del = ls.get('fm_deleted', []);
-      if (!del.includes(uid)) { del.push(uid); ls.set('fm_deleted', del); }
     },
     favs() { return ls.get('fm_favs', []); },
     isFav(id) { return this.favs().includes(id); },
